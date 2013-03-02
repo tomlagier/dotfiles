@@ -296,7 +296,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 #defaults write com.apple.dock persistent-apps -array
 
 # Don’t animate opening applications from the Dock
-defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock launchanim -bool true
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
@@ -440,6 +440,27 @@ defaults write com.apple.terminal "Startup Window Settings" -string "Mathias"
 # i.e. hover over a window and start typing in it without clicking first
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
+
+###############################################################################
+# Sublime Text 2                                                              #
+###############################################################################
+
+sublime_dir=$HOME/Library/Application\ Support/Sublime\ Text\ 2
+
+if [ -d "$sublime_dir" ]; then
+	sudo $HOME/init/Sublime-Text-2-Icon/mac_replace_icons
+
+  if [ "$(ls -A $sublime_dir/Installed\ Pakages)" ]; then
+  	#echo "Take action $DIR is not Empty"
+	else
+  	(cd $HOME/init && wget "https://sublime.wbond.net/Package%20Control.sublime-package")
+		cp $HOME/init/Package%20Control.sublime-package $sublime_dir/Installed\ Pakages
+	fi
+
+fi
+
+
+
 
 ###############################################################################
 # Time Machine                                                                #
