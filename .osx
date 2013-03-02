@@ -445,16 +445,14 @@ defaults write com.apple.terminal "Startup Window Settings" -string "Mathias"
 # Sublime Text 2                                                              #
 ###############################################################################
 
-sublime_dir=$HOME/Library/Application\ Support/Sublime\ Text\ 2
+sublime_dir="$HOME/Library/Application Support/Sublime Text 2"
 
 if [ -d "$sublime_dir" ]; then
 	sudo $HOME/init/Sublime-Text-2-Icon/mac_replace_icons
 
-  if [ "$(ls -A $sublime_dir/Installed\ Pakages)" ]; then
-  	#echo "Take action $DIR is not Empty"
-	else
-  	(cd $HOME/init && wget "https://sublime.wbond.net/Package%20Control.sublime-package")
-		cp $HOME/init/Package%20Control.sublime-package $sublime_dir/Installed\ Pakages
+	if [ ! $(ls -A "$sublime_dir/Installed Packages") ]; then
+		(cd $HOME/init && wget -O "Package Control.sublime-package" "https://sublime.wbond.net/Package%20Control.sublime-package")
+		cp "$HOME/init/Package Control.sublime-package" "$sublime_dir/Installed Packages"
 	fi
 
 fi
