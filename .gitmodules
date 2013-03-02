@@ -1,0 +1,3 @@
+[submodule "init/Sublime-Text-2-Icon"]
+	path = init/Sublime-Text-2-Icon
+	url = git://github.com/dmatarazzo/Sublime-Text-2-Icon.git
