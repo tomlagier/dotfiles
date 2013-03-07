@@ -52,11 +52,11 @@ function parse_git_branch() {
 }
 
 function parse_hg_dirty() {
-	[[ $(hg summary 2> /dev/null | grep commit | tail -n1 | cut -c 9-) != "(clean)" ]] && echo "*"	
+	[[ -n $(hg status 2> /dev/null) ]] && echo "*"	
 }
 
 function parse_hg_branch() {
-	hg summary 2> /dev/null | grep -m 1 branch | cut -c 9- | sed -e "s/* \(.*\)/\1$(parse_hg_dirty)/"
+	hg summary 2> /dev/null | grep branch  | tail -n1 | cut -c 9- | sed -e "s/* \(.*\)/\1$(parse_hg_dirty)/"
 }
 
 parse_svn_branch() {
