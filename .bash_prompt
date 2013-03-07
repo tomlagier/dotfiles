@@ -51,5 +51,33 @@ function parse_git_branch() {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
+function parse_hg_dirty() {
+	[[ $(hg summary 2> /dev/null | grep commit | cut -c 9-) != *"clean"* ]] && echo "*"	
+}
+
+function parse_hg_branch() {
+	hg summary 2> /dev/null | grep branch | cut -c 9- | sed -e "s/* \(.*\)/\1$(parse_hg_dirty)/"
+}
+
+parse_svn_branch() {
+  #parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (svn::"$1")" }'
+	parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print "svn" }'
+}
+
+parse_svn_url() {
+  svn info 2>/dev/null | sed -ne 's#^URL: ##p'
+}
+
+parse_svn_repository_root() {
+  svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
+}
+
+PS1Host="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h "
+PS1Path="\[$WHITE\]in \[$GREEN\]\w\[$WHITE\] "
+SVNbranch="\$([[ -n \$(parse_svn_repository_root) ]] && echo \"on svn \")\[$PURPLE\]\$(parse_svn_branch)\[$WHITE\]"
+GitBranch="\$([[ -n \$(git branch 2> /dev/null) ]] && echo \"on git \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]"
+HgBranch="\$([[ -n \$(hg summary 2> /dev/null) ]] && echo \"on hg \")\[$PURPLE\]\$(parse_hg_branch)\[$WHITE\]"
+PS1prompt="\n\$ \[$RESET\]"
+
+export PS1="$PS1Host$PS1Path$SVNbranch$GitBranch$HgBranch$PS1prompt"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
