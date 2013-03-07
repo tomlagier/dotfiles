@@ -52,15 +52,14 @@ function parse_git_branch() {
 }
 
 function parse_hg_dirty() {
-	[[ $(hg summary 2> /dev/null | grep commit | cut -c 9-) != *"clean"* ]] && echo "*"	
+	[[ $(hg summary 2> /dev/null | grep commit | tail -n1 | cut -c 9-) != "(clean)" ]] && echo "*"	
 }
 
 function parse_hg_branch() {
-	hg summary 2> /dev/null | grep branch | cut -c 9- | sed -e "s/* \(.*\)/\1$(parse_hg_dirty)/"
+	hg summary 2> /dev/null | grep -m 1 branch | cut -c 9- | sed -e "s/* \(.*\)/\1$(parse_hg_dirty)/"
 }
 
 parse_svn_branch() {
-  #parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (svn::"$1")" }'
 	parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print "svn" }'
 }
 
