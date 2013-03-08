@@ -59,12 +59,8 @@ function parse_hg_branch() {
 	hg id -b 2> /dev/null | sed -e "s/\(.*\)/\1$(parse_hg_dirty)/"
 }
 
-parse_svn_branch() {
-	parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print "svn" }'
-}
-
-parse_svn_url() {
-  svn info 2>/dev/null | sed -ne 's#^URL: ##p'
+parse_svn_server() {
+	parse_svn_repository_root | awk -F/ '{print $3}' | awk -F@ '{print $2}'
 }
 
 parse_svn_repository_root() {
@@ -73,7 +69,7 @@ parse_svn_repository_root() {
 
 PS1Host="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h "
 PS1Path="\[$WHITE\]in \[$GREEN\]\w\[$WHITE\] "
-SVNbranch="\$([[ -n \$(parse_svn_repository_root) ]] && echo \"on svn \")\[$PURPLE\]\$(parse_svn_branch)\[$WHITE\]"
+SVNbranch="\$([[ -n \$(parse_svn_repository_root) ]] && echo \"on svn \")\[$PURPLE\]\$(parse_svn_server)\[$WHITE\]"
 GitBranch="\$([[ -n \$(git branch 2> /dev/null) ]] && echo \"on git \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]"
 HgBranch="\$([[ -n \$(hg summary 2> /dev/null) ]] && echo \"on hg \")\[$PURPLE\]\$(parse_hg_branch)\[$WHITE\]"
 PS1prompt="\n\$ \[$RESET\]"
