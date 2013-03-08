@@ -56,7 +56,7 @@ function parse_hg_dirty() {
 }
 
 function parse_hg_branch() {
-	hg summary 2> /dev/null | grep branch  | tail -n1 | cut -c 9- | sed -e "s/* \(.*\)/\1$(parse_hg_dirty)/"
+	hg id -b 2> /dev/null | sed -e "s/\(.*\)/\1$(parse_hg_dirty)/"
 }
 
 parse_svn_branch() {
