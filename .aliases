@@ -136,7 +136,7 @@ alias pumpitup="osascript -e 'set volume 7'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 # Boot into windows
-alias bootwindows="sudo bless -mount /Volumes/BOOTCAMP -legacy -setBoot -nextonly;sudo shutdown -r now"
+alias bootwindows="sudo bless -mount /Volumes/BOOTCAMP -legacy -setBoot -nextonly;osascript -e 'tell app \"System Events\" to restart'"
 
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
