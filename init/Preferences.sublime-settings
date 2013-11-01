@@ -1,9 +1,10 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
+	"theme": "Centurion.sublime-theme",
 	"default_line_ending": "unix",
 	"detect_indentation": false,
-	"draw_white_space": "all",
-	"ensure_newline_at_eof_on_save": false,
+	"draw_white_space": "off",
+	"ensure_newline_at_eof_on_save": true,
 	"file_exclude_patterns":
 	[
 		".DS_Store",
@@ -19,18 +20,19 @@
 		".git",
 		"node_modules"
 	],
-	"font_size": 15.0,
+	"font_size": 12.0,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
-	"line_padding_bottom": 6,
+	"line_padding_bottom": 2,
 	"matchBracketsAngle": true,
 	"remember_open_files": false,
 	"rulers":
 	[
-		80
+		80,
+		90
 	],
 	"tab_size": 2,
 	"translate_tabs_to_spaces": false,
 	"trim_trailing_white_space_on_save": true,
-	"word_wrap": true
+	"word_wrap": false
 }
