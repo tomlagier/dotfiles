@@ -2,6 +2,9 @@
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
 	"theme": "Centurion.sublime-theme",
 	"default_line_ending": "unix",
+	"show_line_endings": true,
+	"default_encoding": "UTF-8",
+	"show_encoding": true,
 	"detect_indentation": false,
 	"draw_white_space": "off",
 	"ensure_newline_at_eof_on_save": true,
@@ -24,6 +27,7 @@
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
 	"line_padding_bottom": 2,
+	"match_brackets": true,
 	"matchBracketsAngle": true,
 	"remember_open_files": false,
 	"rulers":
