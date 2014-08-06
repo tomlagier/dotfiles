@@ -280,6 +280,14 @@ function s() {
 	fi
 }
 
+# `sp` with no arguments opens the project file in the current directory
+function sp() {
+	for f in *.sublime-project; do
+	    subl "$f" 
+	    break
+	done
+}
+
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
 function v() {
