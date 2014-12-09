@@ -328,3 +328,9 @@ function np() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
+
+#Opens Chrome to a Google search of the given query. Relies on the urlencode alias from .aliases
+function google() {
+  ESCAPED_URL=`python -c "import sys, urllib as ul; print ul.quote_plus('$1')"`
+  open /Applications/Google\ Chrome.app/ "http://www.google.com/search?q=$ESCAPED_URL"
+}
